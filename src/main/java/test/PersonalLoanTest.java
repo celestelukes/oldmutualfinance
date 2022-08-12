@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.annotations.AfterMethod;
 import utility.SeleniumDriver;
 import pageobjects.*;
 import utility.ExcelFunctions;
@@ -37,18 +38,25 @@ public class PersonalLoanTest {
         testName = readObject.getObjectRepository().getProperty("personalLoanCalculatorFlow");
        // input_document = new FileInputStream(String.valueOf(new File(filePath)));
        // excel = new ExcelFunctions(input_document);
-        seleniumDriver.SetupTest(url, "Personal Loan Calculator Test");
+        seleniumDriver.setupTest(url, "Personal Loan Calculator Test");
         landingPage = new LandingPage();
         personalLoanPage=new PersonalLoanPage();
+        personalLoanCalculatorPage= new PersonalLoanCalculatorPage();
     }
 
     @Test
     public void personalLoanCalculatorTest() throws Exception {
-
-
             landingPage.assertHeadingAndNavigateToPersonalLoanPage();
-            personalLoanPage.clickCalculatorButton();
+            personalLoanPage.clickCalculateButton();
+            personalLoanCalculatorPage.switchToNewTabAndScrollToDropDownSelector();
+            personalLoanCalculatorPage.selectLoanAmountDurationAndCalculate();
+    }
 
+
+    @AfterMethod
+    public void CleanTest(){
+
+        seleniumDriver.tearDown();
     }
 
 }

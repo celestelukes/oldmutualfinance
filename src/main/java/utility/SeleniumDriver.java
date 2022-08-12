@@ -6,13 +6,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -34,8 +32,8 @@ public class SeleniumDriver  {
     private WebDriverWait wait;
     JavascriptExecutor js;
 
-    public void SetupTest(String url, String testName) throws IOException {
-        BrowserConfig();
+    public void setupTest(String url, String testName) throws IOException {
+        browserConfig();
 
        // ReportClass.ReportDirectory();
         driver.manage().window().maximize();
@@ -48,7 +46,7 @@ public class SeleniumDriver  {
         openPage(url);
     }
 
-    private void BrowserConfig() throws IOException {
+    private void browserConfig() throws IOException {
 
         browser = p.getObjectRepository().getProperty("browser");
 
@@ -72,7 +70,7 @@ public class SeleniumDriver  {
         driver.get(url);
     }
 
-    public void TearDown(){
+    public void tearDown(){
 
 
 
@@ -86,86 +84,20 @@ public class SeleniumDriver  {
     }
 
     //Actions Section
-    public void Click(By locator) {
+    public void click(By locator) {
 
-        WaitForElementToBeClickable(locator);
+        waitForElementToBeClickable(locator);
         driver.findElement(locator).click();
     }
 
-    public void SelectDropDownItemUsingSelector(By locator, String optionText){
+    public void waitForElementToBeClickable(By locator)  {
 
-        WaitForElementToBeClickable(locator);
-        Select dropDownOptions = new Select(driver.findElement(locator));
-        dropDownOptions.selectByVisibleText(optionText);
-    }
-
-    public void SelectItemFromDropDown(By locator, String optionText){
-
-        //string do build generic xpath
-        String template = "//span[contains(text(),'%s')]";
-        String dropDownItemXpath = String.format(template, optionText);
-        WaitForElementToBeClickable(locator);
-        //Click on the dropDown
-        driver.findElement(locator).click();
-        //Click on the item on the dropdown
-        WaitForElementToBeClickable(By.xpath(dropDownItemXpath));
-        driver.findElement(By.xpath(dropDownItemXpath)).click();
-    }
-
-    public void SelectItemFromSearchField(By locator, String optionText) throws InterruptedException {
-
-        //string do build generic xpath
-        String template = "//span[contains(text(),'%s')]";
-        String dropDownItemXpath = String.format(template, optionText);
-        WaitForElementToBeClickable(locator);
-        //Clear search field
-
-        driver.findElement(locator).clear();
-        Thread.sleep(2000);
-        driver.findElement(locator).sendKeys(optionText);
-         String  isEmpty = driver.findElement(locator).getText();
-
-        //Click on the item on the dropdown
-        WaitForElementToBeClickable(By.xpath(dropDownItemXpath));
-        driver.findElement(By.xpath(dropDownItemXpath)).click();
-    }
-
-    public void SendKeys(By locator, String text) {
-
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
-    }
-
-    public Boolean IsElementVisible(By locator)
-    {
-        boolean exists;
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        exists = driver.findElements(locator).size() != 0;
-        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-        return exists;
-
-    }
-
-    public List<WebElement> ElementList(By locator){
-
-        return  driver.findElements(locator);
-    }
-
-    public void WaitForElementToBeClickable(By locator)  {
-
-        wait = new WebDriverWait(driver,15);
+        wait = new WebDriverWait(driver,20);
         wait.until(ExpectedConditions.elementToBeClickable (locator));
     }
 
-    public void ScrollElementToView(By locator){
 
-        js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", locator);
-    }
 
-    public  void scroll(){
-        js.executeScript("window.scrollBy(0,600)");
-    }
     public void SwitchToActiveWindow(){
 
         String mainWindow = driver.getWindowHandle();
@@ -179,26 +111,6 @@ public class SeleniumDriver  {
 
     }
 
-    public String GetText(By locator){
-
-        return driver.findElement(locator).getText();
-    }
-
-    public void ScrollToBottom(By Bodylocator) {
-
-        /* body = driver.findElement(Bodylocator);
-
-        Actions scrollDown = new Actions(driver).
-                .MoveToElement(body, body.Size.Width - 10, 15) // position mouse over scrollbar
-                .ClickAndHold()
-                .MoveByOffset(0, 50) // scroll down
-                .Release()
-                .Build();
-
-        scrollDown.Perform();*/
-
-
-    }
 
     public String GetScreenshot() throws Exception {
         //below line is just to append the date format with the screenshot name to avoid duplicate names

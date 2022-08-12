@@ -9,7 +9,7 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class ReportClass {
 
-    public  static String  fullReportPath ="Reports/AOL_Account_Creation_Reports";
+    public  static String  fullReportPath ="Reports/PersonalLoanCalculator_Reports";
     public  static String  screenshortReportPath;
 
 
