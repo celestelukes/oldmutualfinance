@@ -29,24 +29,29 @@ public class PersonalLoanCalculatorPage {
     }
 
 
-    public void selectLoanAmountDurationAndCalculate() throws Exception {
+    public void selectLoanAmountDurationAndCalculate(String loanAmount, String duration, String totalRepaymentAmount) throws Exception {
         Thread.sleep(500);
+
         driverActions.click(howMuchDoYouNeedDropDown);
-        driverActions.click(amount);
+        if(loanAmount.equalsIgnoreCase("R50000")){
+            driverActions.click(amount);
+        }
 
 
         driverActions.click(nextButton);
 
 
         driverActions.click(repaymentDurationDropDown);
-        driverActions.click(repaymentOption);
+        if(duration.equalsIgnoreCase("60 Months")) {
+            driverActions.click(repaymentOption);
+        }
 
 
 
         driverActions.click(calculateLoanButton);
 
 
-        Assert.assertEquals(driver.findElement(monthlyRepayment).getText(),"R1 656.43 - R1 810.05");
+        Assert.assertEquals(driver.findElement(monthlyRepayment).getText(),totalRepaymentAmount);
         TestReporter.passScenario("Successfully Calculated Loan Amount");
     }
 }
