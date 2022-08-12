@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
@@ -60,9 +61,9 @@ public class SeleniumDriver  {
         }
         else if (browser.equals("FireFox")){
             WebDriverManager.firefoxdriver().setup();
-        }
-        else if (browser.equals("Edge")) {
-            WebDriverManager.edgedriver().setup();
+            if (driver == null) {
+                driver = new FirefoxDriver();
+            }
         }
     }
 
