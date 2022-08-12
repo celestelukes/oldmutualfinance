@@ -19,13 +19,11 @@ public class PersonalLoanTest {
     PersonalLoanCalculatorPage personalLoanCalculatorPage;
 
 
-    String filePath;
-    FileInputStream input_document;
-    ExcelFunctions excel;
+
     ReadObject  readObject = new ReadObject();
     String testName;
     String url;
-    String scenario;
+
 
 
 
@@ -36,8 +34,6 @@ public class PersonalLoanTest {
         seleniumDriver = new SeleniumDriver();
         url = readObject.getObjectRepository().getProperty("oldMutualUrl");
         testName = readObject.getObjectRepository().getProperty("personalLoanCalculatorFlow");
-       // input_document = new FileInputStream(String.valueOf(new File(filePath)));
-       // excel = new ExcelFunctions(input_document);
         seleniumDriver.setupTest(url, "Personal Loan Calculator Test");
         landingPage = new LandingPage();
         personalLoanPage=new PersonalLoanPage();

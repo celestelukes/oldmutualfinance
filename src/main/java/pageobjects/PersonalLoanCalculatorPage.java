@@ -11,7 +11,6 @@ import static utility.SeleniumDriver.driver;
 public class PersonalLoanCalculatorPage {
 
     SeleniumDriver driverActions = new SeleniumDriver();
-    TestReporter testReporter = new TestReporter();
 
     By howMuchDoYouNeedDropDown=By.xpath("//*[@id=\"loanAmount\"]/div/div/div/om-form-dropdown-field/div/div[1]/span[1]");
     By amount=By.xpath("//*[@id=\"R50000\"]");
@@ -48,7 +47,6 @@ public class PersonalLoanCalculatorPage {
 
 
         Assert.assertEquals(driver.findElement(monthlyRepayment).getText(),"R1 656.43 - R1 810.05");
-
-        driverActions.GetScreenshot();
+        TestReporter.passScenario("Successfully Calculated Loan Amount");
     }
 }

@@ -16,31 +16,18 @@ public class TestReporter {
         test.log(LogStatus.INFO, stepInfo);
     }
 
-    public static void LogFailure(String reasonForFailure){
 
-        test.log(LogStatus.FAIL, reasonForFailure);
-    }
-
-    public static void AddScreenShotToLog() throws Exception {
+    public static void addScreenShotToLog() throws Exception {
 
         String screenshotPath = driverActions.GetScreenshot();
         test.log(LogStatus.INFO,  test.addScreenCapture(screenshotPath));
     }
 
-    public static void PassScenario(String passInfo) throws Exception {
+    public static void passScenario(String passInfo) throws Exception {
 
         test.log(LogStatus.PASS, passInfo);
         String screenshotPath = driverActions.GetScreenshot();
         test.log(LogStatus.PASS,  test.addScreenCapture(screenshotPath));
     }
-
-    public static void FailScenario(String reasonForFailure) throws Exception {
-
-        test.log(LogStatus.FAIL, reasonForFailure);
-        String screenshotPath = driverActions.GetScreenshot();
-        test.log(LogStatus.FAIL,  test.addScreenCapture(screenshotPath));
-    }
-
-
 
 }

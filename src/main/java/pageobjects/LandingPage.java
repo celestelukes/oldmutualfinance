@@ -1,7 +1,6 @@
 package pageobjects;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import utility.SeleniumDriver;
 import utility.TestReporter;
@@ -15,7 +14,7 @@ public class LandingPage extends SeleniumDriver {
     By personalLoanButton=By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/om-wc-config/div/om-page/div/div/main/om-product-carousel/div/om-section/div/div/div[2]/div/om-carousel-container/div/div[1]/ul/li[2]/om-refined-product-card/om-product-card/div/div[2]/div[2]/div[2]/om-button");
 
 
-    public void assertHeadingAndNavigateToPersonalLoanPage() throws InterruptedException {
+    public void assertHeadingAndNavigateToPersonalLoanPage() throws Exception {
         String title=driver.getTitle();
         Assert.assertEquals(title,"Bank and Borrow Solutions | Old Mutual");
         Thread.sleep(2000);
@@ -27,5 +26,6 @@ public class LandingPage extends SeleniumDriver {
         driverActions.click(personalLoanButton);
         Thread.sleep(2000);
         TestReporter.LogStep("Clicked Personal Loan Button");
+        TestReporter.addScreenShotToLog();
     }
 }
