@@ -14,7 +14,7 @@ public class PersonalLoanPage extends SeleniumDriver {
 
     public void clickCalculateButton() throws Exception {
 
-        Assert.assertEquals(driver.findElement(calculateButton).getText(),"Get the loan not the stress");
+        Assert.assertEquals(driver.findElement(personalPageHeader).getText(),"Get the loan not the stress");
 
         driverActions.click(calculateButton);
         TestReporter.LogStep("Clicked Calculator Button");TestReporter.addScreenShotToLog();
